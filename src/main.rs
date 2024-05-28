@@ -1,13 +1,12 @@
-use std::io::{self};
+use std::io::{self, Write};
 
 fn main() 
 {   let mut win_status: u8;
     let mut buffer = String::from("");
-    let mut word_length: u8;
+    let mut difficulty: u8;
     loop 
     {
-        print!("Enter difficulty: ");
-        io::stdin().read_line(&mut buffer).expect("input failure");
+        difficulty = get_difficulty();
         win_status = game_loop();
 
         if win_status == 1
@@ -28,6 +27,21 @@ fn main()
             break;
         }
     }
+}
+fn get_difficulty() -> u8
+{
+   let mut buffer = String::from("");
+   let word_length: u8;      
+   print!("Enter difficulty: ");
+   match io::stdout().flush()
+   {
+        Ok(()) => {}
+        Err(err) => eprintln!("Error flushing stdout: {}", err),
+   }
+    io::stdin().read_line(&mut buffer).expect("input failure");
+    buffer = buffer.trim().to_string();
+    word_length = string_to_u8(&buffer);
+    return word_length;
 }
 fn string_to_u8(input: &String) -> u8
 {
