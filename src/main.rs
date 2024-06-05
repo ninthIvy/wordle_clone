@@ -1,12 +1,14 @@
 use std::io::{self, Write};
-
+//use rand::seq::SliceRandom;
+//use std::collections::HashMap;
+//TODO: bucketing approach
 fn main() 
 {   let mut win_status: u8;
     let mut buffer = String::from("");
     let mut difficulty: u8;
     loop 
     {
-        difficulty = get_difficulty();
+       // difficulty = get_difficulty();
         win_status = game_loop();
 
         if win_status == 1
@@ -28,6 +30,7 @@ fn main()
         }
     }
 }
+
 fn get_difficulty() -> u8
 {
    let mut buffer = String::from("");
